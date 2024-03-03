@@ -8,32 +8,37 @@ class OnBoradingItem extends StatelessWidget {
   final OnBoardingModel onBoardingModel;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 50),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            onBoardingModel.image,
-            // fit: BoxFit.scaleDown,
-          ),
-          const SizedBox(
-            height: 80,
-          ),
-          Text(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 6,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            SvgPicture.asset(
+              onBoardingModel.image,
+            ),
+          ]),
+        ),
+        // const SizedBox(
+        //   height: 80,
+        // ),
+        Expanded(
+          child: Text(
             onBoardingModel.title,
             style: AppStyles.styleSemiBold24,
           ),
-          const SizedBox(
-            height: 16,
-          ),
-          Text(
+        ),
+        // const SizedBox(
+        //   height: 16,
+        // ),
+        Expanded(
+          child: Text(
             onBoardingModel.subtitle,
             textAlign: TextAlign.center,
             style: AppStyles.styleRegular12,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

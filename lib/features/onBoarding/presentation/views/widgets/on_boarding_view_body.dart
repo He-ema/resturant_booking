@@ -6,7 +6,6 @@ import 'package:jobizz/features/onBoarding/presentation/views/widgets/on_boardin
 
 class OnBoardingViewBody extends StatelessWidget {
   const OnBoardingViewBody({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Column(
