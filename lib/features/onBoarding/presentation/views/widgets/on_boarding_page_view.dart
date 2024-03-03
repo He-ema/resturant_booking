@@ -6,8 +6,9 @@ import 'package:jobizz/features/onBoarding/presentation/views/widgets/on_boardin
 class OnBoardingPageView extends StatelessWidget {
   const OnBoardingPageView({
     super.key,
+    required this.pageController,
   });
-
+  final PageController pageController;
   static const items = [
     OnBoardingModel(
         image: Assets.imagesOnBoard1,
@@ -28,6 +29,7 @@ class OnBoardingPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
+      controller: pageController,
       itemCount: items.length,
       itemBuilder: (context, index) => OnBoradingItem(
         onBoardingModel: items[index],
