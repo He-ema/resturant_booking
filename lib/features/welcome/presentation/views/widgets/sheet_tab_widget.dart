@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:jobizz/constants.dart';
-import 'package:jobizz/core/utils/app_styles.dart';
+import 'package:jobizz/features/welcome/presentation/views/widgets/active_and_in_active_sheet_tab_bar_item.dart';
 
 class SheetTabWidget extends StatelessWidget {
-  const SheetTabWidget({super.key, required this.text, required this.isActive});
+  const SheetTabWidget({Key? key, required this.text, required this.isActive})
+      : super(key: key);
+
   final String text;
   final bool isActive;
+
   @override
   Widget build(BuildContext context) {
-    return IntrinsicWidth(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            text,
-            style: AppStyles.styleSemiBold16.copyWith(
-              color: isActive ? kPrimaryColor : const Color(0xff89909E),
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      transitionBuilder: (Widget child, Animation<double> animation) {
+        return ScaleTransition(
+          scale: Tween<double>(
+            begin: 0.5,
+            end: 1.0,
+          ).animate(animation),
+          child: FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+        );
+      },
+      child: isActive
+          ? ActiveSheetTabBarItem(
+              key: UniqueKey(),
+              text: text,
+            )
+          : InActiveSheetTabBarItem(
+              key: UniqueKey(),
+              text: text,
             ),
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          isActive
-              ? Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 5),
-                  height: 1,
-                  color: kPrimaryColor,
-                )
-              : const SizedBox(),
-        ],
-      ),
     );
   }
 }
