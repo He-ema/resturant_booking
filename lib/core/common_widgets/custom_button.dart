@@ -5,11 +5,17 @@ import 'package:jobizz/core/utils/app_styles.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton(
-      {super.key, this.image, required this.text, this.color, this.textColor});
+      {super.key,
+      this.image,
+      required this.text,
+      this.color,
+      this.textColor,
+      this.onPressed});
   final String? image;
   final String text;
   final Color? color;
   final Color? textColor;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
@@ -18,7 +24,7 @@ class CustomButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

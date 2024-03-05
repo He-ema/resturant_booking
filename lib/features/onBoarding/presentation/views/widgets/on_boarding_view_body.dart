@@ -38,9 +38,12 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Skip',
-              style: AppStyles.styleRegular16,
+            const Padding(
+              padding: EdgeInsets.only(left: 16.0),
+              child: Text(
+                'Skip',
+                style: AppStyles.styleRegular16,
+              ),
             ),
             DotsIndicator(activeIndex: currentInedx),
             IconButton(
