@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobizz/features/welcome/presentation/managers/cubit/bottom_sheet_cubit.dart';
 import 'package:jobizz/features/welcome/presentation/views/widgets/sheet_tab_widget.dart';
 
 class BottomSheetheader extends StatefulWidget {
@@ -27,6 +29,10 @@ class _BottomSheetheaderState extends State<BottomSheetheader> {
               onTap: () {
                 if (activeIndex != e.key) {
                   activeIndex = e.key;
+                  BlocProvider.of<BottomSheetCubit>(context)
+                      .changeCurrentIndex = activeIndex;
+                  print(BlocProvider.of<BottomSheetCubit>(context)
+                      .getCurrentIndex);
                 }
                 setState(() {});
               },

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobizz/core/utils/assets.dart';
-import 'package:jobizz/features/onBoarding/presentation/view_models/on_boarding_model.dart';
+import 'package:jobizz/features/onBoarding/data/models/on_boarding_model.dart';
 import 'package:jobizz/features/onBoarding/presentation/views/widgets/on_boarding_item.dart';
 
 class OnBoardingPageView extends StatelessWidget {

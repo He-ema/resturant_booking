@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
-import 'package:jobizz/features/onBoarding/presentation/view_models/on_boarding_model.dart';
+import 'package:jobizz/features/onBoarding/data/models/on_boarding_model.dart';
 
 class OnBoradingItem extends StatelessWidget {
   const OnBoradingItem({super.key, required this.onBoardingModel});

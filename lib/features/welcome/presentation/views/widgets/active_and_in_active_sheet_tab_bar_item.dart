@@ -51,6 +51,9 @@ class InActiveSheetTabBarItem extends StatelessWidget {
                 color: const Color(0xff89909E),
               ),
             ),
+            const SizedBox(
+              height: 14,
+            ),
           ],
         ),
       ),

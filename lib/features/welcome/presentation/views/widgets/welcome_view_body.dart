@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobizz/constants.dart';
 import 'package:jobizz/core/common_widgets/custom_button.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
 import 'package:jobizz/core/utils/assets.dart';
+import 'package:jobizz/features/welcome/presentation/managers/cubit/bottom_sheet_cubit.dart';
 import 'package:jobizz/features/welcome/presentation/views/widgets/welcome_buttom_sheet_body.dart';
 
 class WelcomeViewBody extends StatelessWidget {
@@ -54,14 +57,21 @@ class WelcomeViewBody extends StatelessWidget {
                     text: 'Create account',
                     onPressed: () {
                       showModalBottomSheet(
+                        enableDrag: true,
+                        backgroundColor: Colors.white,
+                        isDismissible: true,
+                        // isScrollControlled: true,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(36),
+                            topRight: Radius.circular(36),
                           ),
                         ),
                         context: context,
-                        builder: (context) => const WelcomeButtomSheetBody(),
+                        builder: (context) => BlocProvider(
+                          create: (context) => BottomSheetCubit(),
+                          child: const WelcomeButtomSheetBody(),
+                        ),
                       );
                     },
                   ),
