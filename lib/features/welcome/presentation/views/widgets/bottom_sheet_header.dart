@@ -31,8 +31,6 @@ class _BottomSheetheaderState extends State<BottomSheetheader> {
                   activeIndex = e.key;
                   BlocProvider.of<BottomSheetCubit>(context)
                       .changeCurrentIndex = activeIndex;
-                  print(BlocProvider.of<BottomSheetCubit>(context)
-                      .getCurrentIndex);
                 }
                 setState(() {});
               },

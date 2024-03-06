@@ -60,7 +60,7 @@ class WelcomeViewBody extends StatelessWidget {
                         enableDrag: true,
                         backgroundColor: Colors.white,
                         isDismissible: true,
-                        // isScrollControlled: true,
+                        isScrollControlled: true,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(36),
