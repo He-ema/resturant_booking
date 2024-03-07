@@ -4,8 +4,6 @@ import 'package:jobizz/constants.dart';
 import 'package:jobizz/features/welcome/presentation/managers/cubit/bottom_sheet_cubit.dart';
 import 'package:jobizz/features/welcome/presentation/views/widgets/bottom_sheet_header.dart';
 import 'package:jobizz/features/welcome/presentation/views/widgets/bottom_sheet_other_body.dart';
-import 'package:jobizz/features/welcome/presentation/views/widgets/create_account.dart';
-import 'package:jobizz/features/welcome/presentation/views/widgets/custom_text_form_field.dart';
 
 class WelcomeButtomSheetBody extends StatefulWidget {
   const WelcomeButtomSheetBody({super.key});
@@ -31,29 +29,35 @@ class _WelcomeButtomSheetBodyState extends State<WelcomeButtomSheetBody> {
               ),
             ),
           ),
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(
-                height: 16,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.viewInsetsOf(context).bottom),
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    width: MediaQuery.sizeOf(context).width * 0.1,
+                    height: 4,
+                    color: kPrimaryColor,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  const BottomSheetheader(),
+                  const SizedBox(
+                    height: 36,
+                  ),
+                  BottomSheetOtherBody(
+                      index: BlocProvider.of<BottomSheetCubit>(context)
+                          .getCurrentIndex),
+                ],
               ),
-              Container(
-                width: MediaQuery.sizeOf(context).width * 0.1,
-                height: 4,
-                color: kPrimaryColor,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              const BottomSheetheader(),
-              const SizedBox(
-                height: 36,
-              ),
-              BottomSheetOtherBody(
-                  index: BlocProvider.of<BottomSheetCubit>(context)
-                      .getCurrentIndex),
-            ],
+            ),
           ),
         );
       },

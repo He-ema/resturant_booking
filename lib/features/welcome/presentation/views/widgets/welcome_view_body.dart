@@ -56,23 +56,7 @@ class WelcomeViewBody extends StatelessWidget {
                   child: CustomButton(
                     text: 'Create account',
                     onPressed: () {
-                      showModalBottomSheet(
-                        enableDrag: true,
-                        backgroundColor: Colors.white,
-                        isDismissible: true,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(36),
-                            topRight: Radius.circular(36),
-                          ),
-                        ),
-                        context: context,
-                        builder: (context) => BlocProvider(
-                          create: (context) => BottomSheetCubit(),
-                          child: const WelcomeButtomSheetBody(),
-                        ),
-                      );
+                      showTheWelcomeSheet(context);
                     },
                   ),
                 ),
@@ -85,7 +69,9 @@ class WelcomeViewBody extends StatelessWidget {
                     text: 'Login',
                     color: const Color(0xffD1FAE5),
                     textColor: const Color(0xff10B981),
-                    onPressed: () {},
+                    onPressed: () {
+                      showTheWelcomeSheet(context);
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -104,6 +90,26 @@ class WelcomeViewBody extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Future<dynamic> showTheWelcomeSheet(BuildContext context) {
+    return showModalBottomSheet(
+      enableDrag: true,
+      backgroundColor: Colors.white,
+      isDismissible: true,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(36),
+          topRight: Radius.circular(36),
+        ),
+      ),
+      context: context,
+      builder: (context) => BlocProvider(
+        create: (context) => BottomSheetCubit(),
+        child: const WelcomeButtomSheetBody(),
+      ),
     );
   }
 }

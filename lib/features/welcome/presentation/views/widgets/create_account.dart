@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jobizz/core/common_widgets/custom_button.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
+import 'package:jobizz/core/utils/assets.dart';
 import 'package:jobizz/features/welcome/presentation/views/widgets/custom_text_form_field.dart';
 
 class CreateAccount extends StatelessWidget {
@@ -40,7 +41,7 @@ class CreateAccount extends StatelessWidget {
           height: 35,
         ),
         CustomButton(
-          text: '',
+          text: 'Registeration',
           onPressed: () {},
         ),
         Divider(
@@ -49,8 +50,14 @@ class CreateAccount extends StatelessWidget {
           endIndent: MediaQuery.sizeOf(context).width * 0.3,
         ),
         CustomButton(
-          text: '',
+          text: 'Sign Up with google',
+          textColor: const Color(0xff222222),
+          image: Assets.imagesIcGoogle,
+          color: const Color(0xffF4F4F4),
           onPressed: () {},
+        ),
+        const SizedBox(
+          height: 36,
         ),
       ],
     );

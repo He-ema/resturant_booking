@@ -28,7 +28,12 @@ class CustomButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          image == null ? const SizedBox() : SvgPicture.asset(image!),
+          image == null
+              ? const SizedBox()
+              : Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: SvgPicture.asset(image!),
+                ),
           Text(
             text,
             style: AppStyles.styleBold14

@@ -10,16 +10,23 @@ class BottomSheetOtherBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 500),
       transitionBuilder: (Widget child, Animation<double> animation) {
-        return ScaleTransition(
-          scale: Tween<double>(
-            begin: 0.5,
+        // Change the transition to a custom animation
+        return RotationTransition(
+          turns: Tween<double>(
+            begin: 0.0,
             end: 1.0,
           ).animate(animation),
-          child: FadeTransition(
-            opacity: animation,
-            child: child,
+          child: ScaleTransition(
+            scale: Tween<double>(
+              begin: 0.0,
+              end: 1.0,
+            ).animate(animation),
+            child: FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
           ),
         );
       },
