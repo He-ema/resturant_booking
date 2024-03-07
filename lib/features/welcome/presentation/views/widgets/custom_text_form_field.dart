@@ -8,6 +8,13 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty ?? true) {
+          return 'This field can\'t be empty';
+        } else {
+          return null;
+        }
+      },
       cursorColor: kPrimaryColor,
       decoration: InputDecoration(
         hintText: hint,
