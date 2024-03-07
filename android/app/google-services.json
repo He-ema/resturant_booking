@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "317717748016",
+    "project_id": "resturant-booking-6a5e5",
+    "storage_bucket": "resturant-booking-6a5e5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317717748016:android:2865859838ce8cbe9050f5",
+        "android_client_info": {
+          "package_name": "com.example.jobizz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkZmgss1Z7wLRD4Vu1Gzu1rjSt69KDbsA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

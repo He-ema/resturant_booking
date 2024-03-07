@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobizz/constants.dart';
 import 'package:jobizz/core/common_widgets/custom_button.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
 import 'package:jobizz/core/utils/assets.dart';
@@ -40,10 +41,22 @@ class _LoginState extends State<Login> {
           ),
           const CustomTextFormField(hint: '**** **** ****'),
           const SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                'Forgot password ?',
+                style: AppStyles.styleSemiBold12.copyWith(color: kPrimaryColor),
+              ),
+            ],
+          ),
+          const SizedBox(
             height: 35,
           ),
           CustomButton(
-            text: 'Registeration',
+            text: 'Login',
             onPressed: () {
               if (formKey.currentState!.validate()) {
               } else {}
