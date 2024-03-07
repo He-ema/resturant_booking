@@ -3,11 +3,13 @@ import 'package:jobizz/constants.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({super.key, required this.hint});
+  const CustomTextFormField({super.key, required this.hint, this.controller});
   final String hint;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       validator: (value) {
         if (value!.isEmpty ?? true) {
           return 'This field can\'t be empty';

@@ -15,6 +15,17 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -31,7 +42,13 @@ class _LoginState extends State<Login> {
           const SizedBox(
             height: 8,
           ),
-          const CustomTextFormField(hint: 'Eg namaemail@emailkamu.com'),
+          CustomTextFormField(
+            hint: 'Eg namaemail@emailkamu.com',
+            controller: _emailController,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
           const Text(
             'Password',
             style: AppStyles.styleSemiBold14,
@@ -39,7 +56,8 @@ class _LoginState extends State<Login> {
           const SizedBox(
             height: 8,
           ),
-          const CustomTextFormField(hint: '**** **** ****'),
+          CustomTextFormField(
+              hint: '**** **** ****', controller: _passwordController),
           const SizedBox(
             height: 10,
           ),
