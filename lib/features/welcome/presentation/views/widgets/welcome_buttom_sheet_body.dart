@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobizz/constants.dart';
-import 'package:jobizz/features/welcome/presentation/managers/cubit/bottom_sheet_cubit.dart';
+import 'package:jobizz/features/welcome/presentation/managers/sheet_cubit/bottom_sheet_cubit.dart';
 import 'package:jobizz/features/welcome/presentation/views/widgets/bottom_sheet_header.dart';
 import 'package:jobizz/features/welcome/presentation/views/widgets/bottom_sheet_other_body.dart';
 

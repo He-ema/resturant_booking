@@ -42,15 +42,15 @@ class Login extends StatelessWidget {
           endIndent: MediaQuery.sizeOf(context).width * 0.3,
         ),
         CustomButton(
-          text: 'Sign Up with google',
+          text: 'Login with google',
           textColor: const Color(0xff222222),
           image: Assets.imagesIcGoogle,
           color: const Color(0xffF4F4F4),
           onPressed: () {},
         ),
         const SizedBox(
-          height: 36 + 92,
-          // height: 36,
+          // height: 36 + 92,
+          height: 36,
         ),
       ],
     );
