@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:jobizz/core/common_widgets/custom_button.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
 import 'package:jobizz/core/utils/assets.dart';
+import 'package:jobizz/features/welcome/presentation/managers/auth_cubit/auth_cubit.dart';
 import 'package:jobizz/features/welcome/presentation/managers/sheet_cubit/bottom_sheet_cubit.dart';
 import 'package:jobizz/features/welcome/presentation/views/widgets/welcome_buttom_sheet_body.dart';
 
@@ -107,7 +108,10 @@ class WelcomeViewBody extends StatelessWidget {
       context: context,
       builder: (context) => BlocProvider(
         create: (context) => BottomSheetCubit(),
-        child: const WelcomeButtomSheetBody(),
+        child: BlocProvider(
+          create: (context) => AuthCubit(),
+          child: const WelcomeButtomSheetBody(),
+        ),
       ),
     );
   }

@@ -1,8 +1,14 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jobizz/core/common_widgets/custom_button.dart';
+import 'package:jobizz/core/utils/app_router.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
 import 'package:jobizz/core/utils/assets.dart';
+import 'package:jobizz/features/welcome/presentation/managers/auth_cubit/auth_cubit.dart';
 import 'package:jobizz/features/welcome/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
@@ -18,6 +24,8 @@ class _CreateAccountState extends State<CreateAccount> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  bool isLoadingEmail = false;
+  bool isLoadingGoogle = false;
   @override
   void dispose() {
     // TODO: implement dispose
@@ -29,81 +37,130 @@ class _CreateAccountState extends State<CreateAccount> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      autovalidateMode: autovalidateMode,
-      key: formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisSize: MainAxisSize.min,
-        children: [
-          const Text(
-            'Full Name',
-            style: AppStyles.styleSemiBold14,
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          CustomTextFormField(
-            hint: 'Enter your full name',
-            controller: _nameController,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            'Email address',
-            style: AppStyles.styleSemiBold14,
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          CustomTextFormField(
-            hint: 'Eg namaemail@emailkamu.com',
-            controller: _emailController,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            'Password',
-            style: AppStyles.styleSemiBold14,
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          CustomTextFormField(
-            hint: '**** **** ****',
-            controller: _passwordController,
-          ),
-          const SizedBox(
-            height: 35,
-          ),
-          CustomButton(
-            text: 'Registeration',
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-              }
-            },
-          ),
-          Divider(
-            height: 16,
-            indent: MediaQuery.sizeOf(context).width * 0.3,
-            endIndent: MediaQuery.sizeOf(context).width * 0.3,
-          ),
-          CustomButton(
-            text: 'Sign Up with google',
-            textColor: const Color(0xff222222),
-            image: Assets.imagesIcGoogle,
-            color: const Color(0xffF4F4F4),
-            onPressed: () {},
-          ),
-          const SizedBox(
-            height: 36,
-          ),
-        ],
+    return BlocListener<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is AuthSuccess) {
+          isLoadingEmail = false;
+          isLoadingGoogle = false;
+
+          setState(() {});
+          if (BlocProvider.of<AuthCubit>(context).signedWithGoogle) {
+            GoRouter.of(context).push(AppRouter.otpRoute);
+          } else {
+            GoRouter.of(context).push(AppRouter.successRoute);
+          }
+        } else if (state is AuthFailure) {
+          isLoadingEmail = false;
+          isLoadingGoogle = false;
+          print('errors');
+          print(state.erroHeader);
+          print(state.errorMessage);
+          setState(() {});
+          showAwesomeDialoug(
+              context: context,
+              messageHedaer: state.erroHeader,
+              messageBody: state.errorMessage);
+        }
+      },
+      child: Form(
+        autovalidateMode: autovalidateMode,
+        key: formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Full Name',
+              style: AppStyles.styleSemiBold14,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            CustomTextFormField(
+              hint: 'Enter your full name',
+              controller: _nameController,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Email address',
+              style: AppStyles.styleSemiBold14,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            CustomTextFormField(
+              hint: 'Eg namaemail@emailkamu.com',
+              controller: _emailController,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Password',
+              style: AppStyles.styleSemiBold14,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            CustomTextFormField(
+              hint: '**** **** ****',
+              controller: _passwordController,
+            ),
+            const SizedBox(
+              height: 35,
+            ),
+            CustomButton(
+              isLoading: isLoadingEmail,
+              text: 'Registeration',
+              onPressed: () async {
+                if (formKey.currentState!.validate()) {
+                  isLoadingEmail = true;
+                  setState(() {});
+                  await BlocProvider.of<AuthCubit>(context).signUpwithEmail(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                      name: _nameController.text);
+                } else {
+                  autovalidateMode = AutovalidateMode.always;
+                }
+              },
+            ),
+            Divider(
+              height: 16,
+              indent: MediaQuery.sizeOf(context).width * 0.3,
+              endIndent: MediaQuery.sizeOf(context).width * 0.3,
+            ),
+            CustomButton(
+              text: 'Sign Up with google',
+              textColor: const Color(0xff222222),
+              image: Assets.imagesIcGoogle,
+              color: const Color(0xffF4F4F4),
+              onPressed: () {},
+            ),
+            const SizedBox(
+              height: 36,
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  AwesomeDialog showAwesomeDialoug(
+      {required BuildContext context,
+      required String messageHedaer,
+      required String messageBody,
+      @required DialogType? dialogType}) {
+    return AwesomeDialog(
+      context: context,
+      dialogType: dialogType ?? DialogType.warning,
+      animType: AnimType.scale,
+      title: messageHedaer,
+      desc: messageBody,
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {},
+    )..show();
   }
 }

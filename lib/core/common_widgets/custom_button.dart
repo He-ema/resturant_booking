@@ -10,10 +10,12 @@ class CustomButton extends StatelessWidget {
       required this.text,
       this.color,
       this.textColor,
-      this.onPressed});
+      this.onPressed,
+      this.isLoading = false});
   final String? image;
   final String text;
   final Color? color;
+  final bool isLoading;
   final Color? textColor;
   final void Function()? onPressed;
   @override
@@ -25,22 +27,26 @@ class CustomButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       onPressed: onPressed,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          image == null
-              ? const SizedBox()
-              : Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: SvgPicture.asset(image!),
+      child: isLoading
+          ? const Center(
+              child: CircularProgressIndicator(color: Colors.white),
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                image == null
+                    ? const SizedBox()
+                    : Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: SvgPicture.asset(image!),
+                      ),
+                Text(
+                  text,
+                  style: AppStyles.styleBold14
+                      .copyWith(color: textColor ?? Colors.white),
                 ),
-          Text(
-            text,
-            style: AppStyles.styleBold14
-                .copyWith(color: textColor ?? Colors.white),
-          ),
-        ],
-      ),
+              ],
+            ),
     );
   }
 }
