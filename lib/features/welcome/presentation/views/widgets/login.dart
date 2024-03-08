@@ -42,11 +42,7 @@ class _LoginState extends State<Login> {
           isLoadingGoogle = false;
 
           setState(() {});
-          if (BlocProvider.of<AuthCubit>(context).signedWithGoogle) {
-            GoRouter.of(context).push(AppRouter.otpRoute);
-          } else {
-            GoRouter.of(context).push(AppRouter.successRoute);
-          }
+          navigateToNextPage(context);
         } else if (state is AuthFailure) {
           isLoadingEmail = false;
           isLoadingGoogle = false;
@@ -108,13 +104,7 @@ class _LoginState extends State<Login> {
               text: 'Login',
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
-                  setState(() {
-                    isLoadingEmail = true;
-                  });
-                  await BlocProvider.of<AuthCubit>(context)
-                      .loginWithEmailAndPassword(
-                          email: _emailController.text,
-                          password: _passwordController.text);
+                  await confirmLoginWithEmail(context);
                 } else {
                   autovalidateMode = AutovalidateMode.always;
                   setState(() {});
@@ -148,5 +138,21 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  Future<void> confirmLoginWithEmail(BuildContext context) async {
+    setState(() {
+      isLoadingEmail = true;
+    });
+    await BlocProvider.of<AuthCubit>(context).loginWithEmailAndPassword(
+        email: _emailController.text, password: _passwordController.text);
+  }
+
+  void navigateToNextPage(BuildContext context) {
+    if (BlocProvider.of<AuthCubit>(context).verified) {
+      GoRouter.of(context).push(AppRouter.bottomNavBarRoute);
+    } else {
+      GoRouter.of(context).push(AppRouter.otpRoute);
+    }
   }
 }

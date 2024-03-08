@@ -34,16 +34,20 @@ class _BottomSheetheaderState extends State<BottomSheetheader> {
           .entries
           .map((e) => GestureDetector(
               onTap: () {
-                if (activeIndex != e.key) {
-                  activeIndex = e.key;
-                  BlocProvider.of<BottomSheetCubit>(context)
-                      .changeCurrentIndex = activeIndex;
-                }
-                setState(() {});
+                changeActiveHeaderItem(e, context);
               },
               child: SheetTabWidget(
                   text: items[e.key], isActive: activeIndex == e.key)))
           .toList(),
     );
+  }
+
+  void changeActiveHeaderItem(MapEntry<int, String> e, BuildContext context) {
+    if (activeIndex != e.key) {
+      activeIndex = e.key;
+      BlocProvider.of<BottomSheetCubit>(context).changeCurrentIndex =
+          activeIndex;
+    }
+    setState(() {});
   }
 }

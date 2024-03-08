@@ -115,12 +115,7 @@ class _CreateAccountState extends State<CreateAccount> {
               text: 'Registeration',
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
-                  isLoadingEmail = true;
-                  setState(() {});
-                  await BlocProvider.of<AuthCubit>(context).signUpwithEmail(
-                      email: _emailController.text,
-                      password: _passwordController.text,
-                      name: _nameController.text);
+                  await confirmRegisterationWithEmail(context);
                 } else {
                   autovalidateMode = AutovalidateMode.always;
                   setState(() {});
@@ -152,5 +147,14 @@ class _CreateAccountState extends State<CreateAccount> {
         ),
       ),
     );
+  }
+
+  Future<void> confirmRegisterationWithEmail(BuildContext context) async {
+    isLoadingEmail = true;
+    setState(() {});
+    await BlocProvider.of<AuthCubit>(context).signUpwithEmail(
+        email: _emailController.text,
+        password: _passwordController.text,
+        name: _nameController.text);
   }
 }
