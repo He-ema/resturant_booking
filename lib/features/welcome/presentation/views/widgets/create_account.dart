@@ -2,10 +2,12 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jobizz/constants.dart';
 import 'package:jobizz/core/common_widgets/custom_button.dart';
 import 'package:jobizz/core/utils/app_router.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
 import 'package:jobizz/core/utils/assets.dart';
+import 'package:jobizz/core/utils/functions/show_awesome_dialouge.dart';
 import 'package:jobizz/features/welcome/presentation/managers/auth_cubit/auth_cubit.dart';
 import 'package:jobizz/features/welcome/presentation/views/widgets/custom_text_form_field.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -52,9 +54,6 @@ class _CreateAccountState extends State<CreateAccount> {
         } else if (state is AuthFailure) {
           isLoadingEmail = false;
           isLoadingGoogle = false;
-          print('errors');
-          print(state.erroHeader);
-          print(state.errorMessage);
           setState(() {});
           showAwesomeDialoug(
               context: context,
@@ -124,6 +123,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       name: _nameController.text);
                 } else {
                   autovalidateMode = AutovalidateMode.always;
+                  setState(() {});
                 }
               },
             ),
@@ -133,11 +133,17 @@ class _CreateAccountState extends State<CreateAccount> {
               endIndent: MediaQuery.sizeOf(context).width * 0.3,
             ),
             CustomButton(
+              isLoading: isLoadingGoogle,
+              circularProgressIndicatorColor: kPrimaryColor,
               text: 'Sign Up with google',
               textColor: const Color(0xff222222),
               image: Assets.imagesIcGoogle,
               color: const Color(0xffF4F4F4),
-              onPressed: () {},
+              onPressed: () async {
+                isLoadingGoogle = true;
+                setState(() {});
+                await BlocProvider.of<AuthCubit>(context).signInWithGoogle();
+              },
             ),
             const SizedBox(
               height: 36,
@@ -146,21 +152,5 @@ class _CreateAccountState extends State<CreateAccount> {
         ),
       ),
     );
-  }
-
-  AwesomeDialog showAwesomeDialoug(
-      {required BuildContext context,
-      required String messageHedaer,
-      required String messageBody,
-      @required DialogType? dialogType}) {
-    return AwesomeDialog(
-      context: context,
-      dialogType: dialogType ?? DialogType.warning,
-      animType: AnimType.scale,
-      title: messageHedaer,
-      desc: messageBody,
-      btnCancelOnPress: () {},
-      btnOkOnPress: () {},
-    )..show();
   }
 }

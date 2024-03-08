@@ -17,7 +17,14 @@ class _BottomSheetheaderState extends State<BottomSheetheader> {
     'Create Account',
     'Login',
   ];
-  int activeIndex = 0;
+  late int activeIndex;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    activeIndex = BlocProvider.of<BottomSheetCubit>(context).getCurrentIndex;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(

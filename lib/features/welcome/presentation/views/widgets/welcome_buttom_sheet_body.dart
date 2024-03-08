@@ -13,7 +13,6 @@ class WelcomeButtomSheetBody extends StatefulWidget {
 }
 
 class _WelcomeButtomSheetBodyState extends State<WelcomeButtomSheetBody> {
-  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BottomSheetCubit, BottomSheetState>(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobizz/constants.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
@@ -11,8 +12,10 @@ class CustomButton extends StatelessWidget {
       this.color,
       this.textColor,
       this.onPressed,
-      this.isLoading = false});
+      this.isLoading = false,
+      this.circularProgressIndicatorColor});
   final String? image;
+  final Color? circularProgressIndicatorColor;
   final String text;
   final Color? color;
   final bool isLoading;
@@ -28,8 +31,9 @@ class CustomButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: isLoading
-          ? const Center(
-              child: CircularProgressIndicator(color: Colors.white),
+          ? Center(
+              child: CircularProgressIndicator(
+                  color: circularProgressIndicatorColor ?? Colors.white),
             )
           : Row(
               mainAxisAlignment: MainAxisAlignment.center,

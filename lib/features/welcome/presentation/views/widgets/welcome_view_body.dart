@@ -56,6 +56,8 @@ class WelcomeViewBody extends StatelessWidget {
                   child: CustomButton(
                     text: 'Create account',
                     onPressed: () {
+                      BlocProvider.of<BottomSheetCubit>(context)
+                          .changeCurrentIndex = 0;
                       showTheWelcomeSheet(context);
                     },
                   ),
@@ -70,6 +72,9 @@ class WelcomeViewBody extends StatelessWidget {
                     color: const Color(0xffD1FAE5),
                     textColor: const Color(0xff10B981),
                     onPressed: () {
+                      BlocProvider.of<BottomSheetCubit>(context)
+                          .changeCurrentIndex = 1;
+
                       showTheWelcomeSheet(context);
                     },
                   ),
