@@ -35,13 +35,13 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
         Expanded(
           child: OnBoardingPageView(pageController: pageController),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: GestureDetector(
-                onTap: () {
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                onPressed: () {
                   GoRouter.of(context).pushReplacement(AppRouter.welcomeRoute);
                 },
                 child: const Text(
@@ -49,21 +49,22 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                   style: AppStyles.styleRegular16,
                 ),
               ),
-            ),
-            DotsIndicator(activeIndex: currentInedx),
-            IconButton(
-              onPressed: () {
-                if (pageController.page == 2) {
-                  GoRouter.of(context).pushReplacement(AppRouter.welcomeRoute);
-                } else {
-                  pageController.nextPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeIn);
-                }
-              },
-              icon: const Icon(Icons.arrow_forward, color: kPrimaryColor),
-            )
-          ],
+              DotsIndicator(activeIndex: currentInedx),
+              IconButton(
+                onPressed: () {
+                  if (pageController.page == 2) {
+                    GoRouter.of(context)
+                        .pushReplacement(AppRouter.welcomeRoute);
+                  } else {
+                    pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeIn);
+                  }
+                },
+                icon: const Icon(Icons.arrow_forward, color: kPrimaryColor),
+              )
+            ],
+          ),
         ),
         const SizedBox(
           height: 20,

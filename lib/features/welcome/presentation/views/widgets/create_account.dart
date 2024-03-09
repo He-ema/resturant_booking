@@ -46,11 +46,7 @@ class _CreateAccountState extends State<CreateAccount> {
           isLoadingGoogle = false;
 
           setState(() {});
-          if (BlocProvider.of<AuthCubit>(context).signedWithGoogle) {
-            GoRouter.of(context).push(AppRouter.otpRoute);
-          } else {
-            GoRouter.of(context).push(AppRouter.successRoute);
-          }
+          navigateToTheNextRegisterationPage(context);
         } else if (state is AuthFailure) {
           isLoadingEmail = false;
           isLoadingGoogle = false;
@@ -147,6 +143,14 @@ class _CreateAccountState extends State<CreateAccount> {
         ),
       ),
     );
+  }
+
+  void navigateToTheNextRegisterationPage(BuildContext context) {
+    if (BlocProvider.of<AuthCubit>(context).signedWithGoogle) {
+      GoRouter.of(context).push(AppRouter.successRoute);
+    } else {
+      GoRouter.of(context).push(AppRouter.otpRoute);
+    }
   }
 
   Future<void> confirmRegisterationWithEmail(BuildContext context) async {
