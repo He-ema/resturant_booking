@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +9,6 @@ import 'package:jobizz/core/utils/assets.dart';
 import 'package:jobizz/core/utils/functions/show_awesome_dialouge.dart';
 import 'package:jobizz/features/welcome/presentation/managers/auth_cubit/auth_cubit.dart';
 import 'package:jobizz/features/welcome/presentation/views/widgets/custom_text_form_field.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
