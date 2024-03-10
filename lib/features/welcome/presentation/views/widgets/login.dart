@@ -82,7 +82,9 @@ class _LoginState extends State<Login> {
               height: 8,
             ),
             CustomTextFormField(
-                hint: '**** **** ****', controller: _passwordController),
+                isPassword: true,
+                hint: '**** **** ****',
+                controller: _passwordController),
             const SizedBox(
               height: 10,
             ),

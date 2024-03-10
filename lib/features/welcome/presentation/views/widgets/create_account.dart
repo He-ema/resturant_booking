@@ -100,6 +100,7 @@ class _CreateAccountState extends State<CreateAccount> {
             CustomTextFormField(
               hint: '**** **** ****',
               controller: _passwordController,
+              isPassword: true,
             ),
             const SizedBox(
               height: 35,
