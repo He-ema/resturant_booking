@@ -22,6 +22,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (event) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       obscureText: (isHidden && (widget.isPassword ?? false)),
       controller: widget.controller,
       validator: (value) {
