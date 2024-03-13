@@ -146,9 +146,13 @@ class _CreateAccountState extends State<CreateAccount> {
 
   void navigateToTheNextRegisterationPage(BuildContext context) {
     if (BlocProvider.of<AuthCubit>(context).signedWithGoogle) {
-      GoRouter.of(context).push(AppRouter.successRoute);
+      GoRouter.of(context).push(AppRouter.bottomNavBarRoute);
     } else {
-      GoRouter.of(context).push(AppRouter.otpRoute);
+      if (BlocProvider.of<AuthCubit>(context).verified) {
+        GoRouter.of(context).push(AppRouter.bottomNavBarRoute);
+      } else {
+        GoRouter.of(context).push(AppRouter.otpRoute);
+      }
     }
   }
 

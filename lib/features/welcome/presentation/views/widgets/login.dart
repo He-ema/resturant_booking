@@ -151,10 +151,14 @@ class _LoginState extends State<Login> {
   }
 
   void navigateToNextPage(BuildContext context) {
-    if (BlocProvider.of<AuthCubit>(context).verified) {
+    if (BlocProvider.of<AuthCubit>(context).signedWithGoogle) {
       GoRouter.of(context).push(AppRouter.bottomNavBarRoute);
     } else {
-      GoRouter.of(context).push(AppRouter.otpRoute);
+      if (BlocProvider.of<AuthCubit>(context).verified) {
+        GoRouter.of(context).push(AppRouter.bottomNavBarRoute);
+      } else {
+        GoRouter.of(context).push(AppRouter.otpRoute);
+      }
     }
   }
 }

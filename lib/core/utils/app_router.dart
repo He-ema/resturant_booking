@@ -30,7 +30,7 @@ abstract class AppRouter {
         builder: (context, state) => const SuccessView(),
       ),
       GoRoute(
-        path: successRoute,
+        path: bottomNavBarRoute,
         builder: (context, state) => const BottomNavBarView(),
       ),
     ],
