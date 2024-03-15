@@ -20,7 +20,7 @@ class ServerFailure extends Failure {
       case DioExceptionType.cancel:
         return ServerFailure('Request was canceled ');
       case DioExceptionType.connectionError:
-        return ServerFailure('Connection timeout with the api server ');
+        return ServerFailure('No Internet Connection ');
       case DioExceptionType.connectionTimeout:
         return ServerFailure('Connection timeout with the api server ');
 
