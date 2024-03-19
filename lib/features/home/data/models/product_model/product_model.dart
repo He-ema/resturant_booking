@@ -1,28 +1,13 @@
-import 'package:equatable/equatable.dart';
+import 'package:jobizz/features/home/data/models/product_model/datum.dart';
 
-import 'datum.dart';
-import 'meta.dart';
+class ProductModel {
+  final Datum data;
 
-class ProductModel extends Equatable {
-  final List<Datum>? data;
-  final Meta? meta;
+  ProductModel({required this.data});
 
-  const ProductModel({this.data, this.meta});
-
-  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-        data: (json['data'] as List<dynamic>?)
-            ?.map((e) => Datum.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        meta: json['meta'] == null
-            ? null
-            : Meta.fromJson(json['meta'] as Map<String, dynamic>),
-      );
-
-  Map<String, dynamic> toJson() => {
-        'data': data?.map((e) => e.toJson()).toList(),
-        'meta': meta?.toJson(),
-      };
-
-  @override
-  List<Object?> get props => [data, meta];
+  factory ProductModel.fromJson(jsonData) {
+    return ProductModel(
+      data: Datum.fromJson(jsonData['data']),
+    );
+  }
 }
