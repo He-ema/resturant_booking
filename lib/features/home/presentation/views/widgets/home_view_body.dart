@@ -12,7 +12,9 @@ class HomeViewBody extends StatelessWidget {
     return BlocBuilder<ProductCubit, ProductState>(
       builder: (context, state) {
         if (state is ProductSuccess) {
-          return const HomeSuccessView();
+          return HomeSuccessView(
+            state: state,
+          );
         } else if (state is ProductFailure) {
           return Center(
             child: Text(state.errorMessage),
