@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobizz/features/home/presentation/views/widgets/carousel_slider_widget.dart';
+import 'package:jobizz/features/home/presentation/views/widgets/carousel_and_dots.dart';
 import 'package:jobizz/features/home/presentation/views/widgets/custom_header.dart';
 
 class HomeSuccessView extends StatelessWidget {
@@ -23,7 +23,7 @@ class HomeSuccessView extends StatelessWidget {
           ),
         ),
         const SliverToBoxAdapter(
-          child: CarouselSliderWidget(),
+          child: CarouselAndDots(),
         ),
         SliverFillRemaining(
           hasScrollBody: false,

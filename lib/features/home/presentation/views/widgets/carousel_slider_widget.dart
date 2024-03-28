@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:jobizz/core/utils/assets.dart';
 
 class CarouselSliderWidget extends StatefulWidget {
-  const CarouselSliderWidget({super.key});
+  const CarouselSliderWidget({super.key, this.changeDots});
+  final Function? changeDots;
 
   @override
   State<CarouselSliderWidget> createState() => _CarouselSliderWidgetState();
@@ -33,6 +34,7 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
           enableInfiniteScroll: true,
           aspectRatio: 280 / 120,
           onPageChanged: (index, reason) {
+            widget.changeDots!(index);
             setState(() {});
             currentIndex = index;
           },

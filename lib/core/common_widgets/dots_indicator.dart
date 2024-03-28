@@ -2,8 +2,12 @@ import 'package:flutter/widgets.dart';
 import 'package:jobizz/core/common_widgets/custom_dot.dart';
 
 class DotsIndicator extends StatelessWidget {
-  const DotsIndicator({super.key, required this.activeIndex});
+  const DotsIndicator({
+    super.key,
+    required this.activeIndex,
+  });
   final int activeIndex;
+
   @override
   Widget build(BuildContext context) {
     return Row(
