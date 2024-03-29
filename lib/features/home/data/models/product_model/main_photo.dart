@@ -1,5 +1,5 @@
 class MainPhoto {
-  final String source;
+  final String? source;
 
   MainPhoto({required this.source});
 

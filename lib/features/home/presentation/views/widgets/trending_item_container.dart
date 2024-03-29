@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:jobizz/constants.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
-import 'package:jobizz/features/home/data/models/product_model/product.dart';
 import 'package:jobizz/features/home/data/models/product_model/product_model.dart';
 
 class TrendingItemContainer extends StatelessWidget {
   const TrendingItemContainer({
-    super.key, required this.product,
+    super.key,
+    required this.product,
   });
   final ProductModel product;
   @override
@@ -34,7 +34,8 @@ class TrendingItemContainer extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(16),
                           child: Image.network(
-                            product.data.products.,
+                            product.mainPhoto?.source ??
+                                'https://res.cloudinary.com/tf-lab/image/upload/restaurant/a356d110-e32c-4ed8-9342-83c7e94322a6/05d9f8ed-cb1b-45e0-9295-0cbfde6b31dd.jpg',
                             fit: BoxFit.cover,
                           ),
                         ),

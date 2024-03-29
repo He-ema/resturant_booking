@@ -25,10 +25,10 @@ class TrendingSection extends StatelessWidget {
               height: (MediaQuery.sizeOf(context).width * 0.4 * 196) / 148,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) => const Padding(
-                  padding: EdgeInsets.only(right: 10),
-                  child: TrendingItemContainer(),
+                itemCount: state.products.length,
+                itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: TrendingItemContainer(product: state.products[index]),
                 ),
               ),
             ),

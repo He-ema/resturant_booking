@@ -1,15 +1,26 @@
-import 'package:jobizz/features/home/data/models/product_model/product.dart';
+import 'package:jobizz/features/home/data/models/product_model/address.dart';
+import 'package:jobizz/features/home/data/models/product_model/geo.dart';
+import 'package:jobizz/features/home/data/models/product_model/main_photo.dart';
 
 class Datum {
-  final List<Product> products;
+  final String name;
+  final Geo geo;
+  final Address address;
+  final MainPhoto? mainPhoto;
 
-  Datum({required this.products});
+  Datum({
+    required this.name,
+    required this.geo,
+    required this.address,
+    required this.mainPhoto,
+  });
 
   factory Datum.fromJson(jsonData) {
     return Datum(
-      products: (jsonData as List<dynamic>)
-          .map((e) => Product.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      name: jsonData['name'],
+      geo: Geo.fromJson(jsonData['geo']),
+      address: Address.fromJson(jsonData['address']),
+      mainPhoto: MainPhoto.fromJson(jsonData['mainPhoto']),
     );
   }
 }
