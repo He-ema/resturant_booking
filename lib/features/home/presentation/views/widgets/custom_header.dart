@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jobizz/constants.dart';
-import 'package:jobizz/core/utils/app_styles.dart';
 import 'package:jobizz/core/utils/assets.dart';
 import 'package:jobizz/features/home/presentation/views/widgets/location_widget.dart';
 import 'package:jobizz/features/home/presentation/views/widgets/header_text_field.dart';
@@ -15,9 +13,9 @@ class CustomHeader extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         children: [
-          const SizedBox(
-            height: 35,
-          ),
+          // const SizedBox(
+          //   height: 35,
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

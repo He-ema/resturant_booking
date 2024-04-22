@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
 
-class TrendingHeader extends StatelessWidget {
-  const TrendingHeader({
+class SectionHeader extends StatelessWidget {
+  const SectionHeader({
     super.key,
+    required this.title,
+    required this.subtitle,
   });
+  final String title;
+  final String subtitle;
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Trending', style: AppStyles.styleSemiBold16),
-            Text('Best of this week', style: AppStyles.styleMedium12),
+            Text(title, style: AppStyles.styleSemiBold16),
+            Text(subtitle, style: AppStyles.styleMedium12),
           ],
         ),
-        Column(
+        const Column(
           children: [
             Text(
               'See all >',

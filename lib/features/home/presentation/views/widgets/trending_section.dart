@@ -17,7 +17,10 @@ class TrendingSection extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
-            const TrendingHeader(),
+            const SectionHeader(
+              subtitle: 'Best of this week',
+              title: 'Trending',
+            ),
             const SizedBox(
               height: 16,
             ),
