@@ -31,7 +31,10 @@ class TrendingSection extends StatelessWidget {
                 itemCount: state.products.length,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.only(right: 10),
-                  child: TrendingItemContainer(product: state.products[index]),
+                  child: TrendingItemContainer(
+                    product: state.products[index],
+                    state: state,
+                  ),
                 ),
               ),
             ),
