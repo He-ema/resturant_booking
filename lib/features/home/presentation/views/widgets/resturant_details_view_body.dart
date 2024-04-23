@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +13,7 @@ import 'package:jobizz/features/home/data/models/product_model/product_model.dar
 import 'package:jobizz/features/home/presentation/managers/product_cubit/product_cubit.dart';
 import 'package:jobizz/features/home/presentation/views/widgets/nearby_resturant_item.dart';
 import 'package:jobizz/features/home/presentation/views/widgets/resturant_details_image_and_data.dart';
+import 'package:jobizz/features/home/presentation/views/widgets/trending_header.dart';
 
 class ResturantDetailsViewBody extends StatelessWidget {
   const ResturantDetailsViewBody(
@@ -46,6 +48,19 @@ class ResturantDetailsViewBody extends StatelessWidget {
           ),
         ),
         ResturantDetailsImageAndData(productModel: productModel),
+        const SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 16),
+            child: Column(
+              children: [
+                SectionHeader(
+                  subtitle: 'Book nearby resturants',
+                  title: 'Book Resturant',
+                ),
+              ],
+            ),
+          ),
+        ),
         SliverList.builder(
           itemCount: state.products.length,
           itemBuilder: (context, index) =>

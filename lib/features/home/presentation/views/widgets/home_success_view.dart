@@ -55,7 +55,7 @@ class HomeSuccessView extends StatelessWidget {
           SliverList.builder(
             itemCount: state.products.length,
             itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               child: NearbyResturantItem(
                 productModel: state.products[index],
               ),
