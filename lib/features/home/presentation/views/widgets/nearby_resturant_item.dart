@@ -27,6 +27,17 @@ class NearbyResturantItem extends StatefulWidget {
 class _NearbyResturantItemState extends State<NearbyResturantItem> {
   bool isLoading = false;
   bool exist = false;
+
+  void check() async {
+    await checkExistence();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    check();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -121,7 +132,9 @@ class _NearbyResturantItemState extends State<NearbyResturantItem> {
 
   Future<void> checkExistence() async {
     isLoading = true;
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
     CollectionReference booked =
         FirebaseFirestore.instance.collection(kBookCollectionReference);
     await booked.doc(widget.productModel.name).get().then((value) {
@@ -132,12 +145,16 @@ class _NearbyResturantItemState extends State<NearbyResturantItem> {
       }
     });
     isLoading = false;
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   Future<void> handleAddingAndDeletionOfItem() async {
     isLoading = true;
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
     CollectionReference booked =
         FirebaseFirestore.instance.collection(kBookCollectionReference);
     await booked.doc(widget.productModel.name).get().then((value) {
@@ -157,6 +174,8 @@ class _NearbyResturantItemState extends State<NearbyResturantItem> {
       }
     });
     isLoading = false;
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 }

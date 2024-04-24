@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,11 +9,32 @@ import 'package:jobizz/core/common_widgets/custom_button.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
 import 'package:jobizz/features/home/data/models/product_model/product_model.dart';
 
-class ResturantDetailsImageAndData extends StatelessWidget {
+class ResturantDetailsImageAndData extends StatefulWidget {
   const ResturantDetailsImageAndData(
       {super.key, required this.productModel, required this.type});
   final ProductModel productModel;
   final int type;
+
+  @override
+  State<ResturantDetailsImageAndData> createState() =>
+      _ResturantDetailsImageAndDataState();
+}
+
+class _ResturantDetailsImageAndDataState
+    extends State<ResturantDetailsImageAndData> {
+  bool exist = false;
+  bool isLoading = false;
+  void check() async {
+    await checkExistence();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    check();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -29,7 +51,7 @@ class ResturantDetailsImageAndData extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              productModel.name,
+              widget.productModel.name,
               style: AppStyles.styleSemiBold20,
             ),
             const SizedBox(
@@ -49,7 +71,7 @@ class ResturantDetailsImageAndData extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    '${productModel.address.country},${productModel.address.locality},${productModel.address.street}',
+                    '${widget.productModel.address.country},${widget.productModel.address.locality},${widget.productModel.address.street}',
                     style: AppStyles.styleMedium12,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
@@ -61,15 +83,16 @@ class ResturantDetailsImageAndData extends StatelessWidget {
               height: 24,
             ),
             Hero(
-              tag: type == 1
+              tag: widget.type == 1
                   ? 'null'
-                  : productModel.name.toString() + type.toString(),
+                  : widget.productModel.name.toString() +
+                      widget.type.toString(),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: CachedNetworkImage(
                   placeholder: (context, url) =>
                       const SpinKitSpinningLines(color: kPrimaryColor),
-                  imageUrl: productModel.mainPhoto?.source ??
+                  imageUrl: widget.productModel.mainPhoto?.source ??
                       'https://res.cloudinary.com/tf-lab/image/upload/restaurant/a356d110-e32c-4ed8-9342-83c7e94322a6/05d9f8ed-cb1b-45e0-9295-0cbfde6b31dd.jpg',
                   fit: BoxFit.cover,
                 ),
@@ -127,8 +150,11 @@ class ResturantDetailsImageAndData extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 20),
                 width: MediaQuery.sizeOf(context).width * 0.5,
                 child: CustomButton(
-                  text: 'Book',
-                  onPressed: () {},
+                  isLoading: isLoading,
+                  text: exist ? 'Cancel' : 'Book',
+                  onPressed: () async {
+                    await handleAddingAndDeletionOfItem();
+                  },
                 ),
               ),
             ),
@@ -136,5 +162,54 @@ class ResturantDetailsImageAndData extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> checkExistence() async {
+    isLoading = true;
+    if (mounted) {
+      setState(() {});
+    }
+    CollectionReference booked =
+        FirebaseFirestore.instance.collection(kBookCollectionReference);
+    await booked.doc(widget.productModel.name).get().then((value) {
+      if (value.exists) {
+        exist = true;
+      } else {
+        exist = false;
+      }
+    });
+    isLoading = false;
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  Future<void> handleAddingAndDeletionOfItem() async {
+    isLoading = true;
+    if (mounted) {
+      setState(() {});
+    }
+    CollectionReference booked =
+        FirebaseFirestore.instance.collection(kBookCollectionReference);
+    await booked.doc(widget.productModel.name).get().then((value) {
+      if (value.exists) {
+        booked.doc(widget.productModel.name).delete();
+        checkExistence();
+        exist = false;
+      } else {
+        booked.doc(widget.productModel.name).set({
+          kResturantName: widget.productModel.name,
+          kResturantImage: widget.productModel.mainPhoto!.source,
+          kResturantAddress:
+              '${widget.productModel.address.country},${widget.productModel.address.locality},${widget.productModel.address.street}',
+        });
+        checkExistence();
+        exist = true;
+      }
+    });
+    isLoading = false;
+    if (mounted) {
+      setState(() {});
+    }
   }
 }
