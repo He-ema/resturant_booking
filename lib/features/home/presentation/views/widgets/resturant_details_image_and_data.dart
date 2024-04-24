@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:jobizz/constants.dart';
+import 'package:jobizz/core/common_widgets/custom_button.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
 import 'package:jobizz/features/home/data/models/product_model/product_model.dart';
 
@@ -114,6 +117,16 @@ class ResturantDetailsImageAndData extends StatelessWidget {
                   ],
                 ),
               ],
+            ),
+            Center(
+              child: Container(
+                padding: const EdgeInsets.only(top: 20),
+                width: MediaQuery.sizeOf(context).width * 0.5,
+                child: CustomButton(
+                  text: 'Book',
+                  onPressed: () {},
+                ),
+              ),
             ),
           ],
         ),
