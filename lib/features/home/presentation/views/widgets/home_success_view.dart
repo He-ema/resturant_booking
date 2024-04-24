@@ -58,6 +58,7 @@ class HomeSuccessView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               child: NearbyResturantItem(
                 productModel: state.products[index],
+                state: state,
               ),
             ),
           )

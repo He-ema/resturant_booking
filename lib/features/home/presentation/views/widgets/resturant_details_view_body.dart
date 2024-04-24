@@ -17,9 +17,13 @@ import 'package:jobizz/features/home/presentation/views/widgets/trending_header.
 
 class ResturantDetailsViewBody extends StatelessWidget {
   const ResturantDetailsViewBody(
-      {super.key, required this.productModel, required this.state});
+      {super.key,
+      required this.productModel,
+      required this.state,
+      required this.type});
   final ProductModel productModel;
   final ProductSuccess state;
+  final int type;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +51,10 @@ class ResturantDetailsViewBody extends StatelessWidget {
             style: AppStyles.styleSemiBold16.copyWith(color: Colors.white),
           ),
         ),
-        ResturantDetailsImageAndData(productModel: productModel),
+        ResturantDetailsImageAndData(
+          productModel: productModel,
+          type: type,
+        ),
         const SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 16),
@@ -63,8 +70,11 @@ class ResturantDetailsViewBody extends StatelessWidget {
         ),
         SliverList.builder(
           itemCount: state.products.length,
-          itemBuilder: (context, index) =>
-              NearbyResturantItem(productModel: state.products[index]),
+          itemBuilder: (context, index) => NearbyResturantItem(
+            productModel: state.products[index],
+            state: state,
+            isDetails: true,
+          ),
         ),
       ],
     );

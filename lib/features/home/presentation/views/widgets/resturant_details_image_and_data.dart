@@ -9,10 +9,15 @@ import 'package:jobizz/core/utils/app_styles.dart';
 import 'package:jobizz/features/home/data/models/product_model/product_model.dart';
 
 class ResturantDetailsImageAndData extends StatelessWidget {
-  const ResturantDetailsImageAndData({super.key, required this.productModel});
+  const ResturantDetailsImageAndData(
+      {super.key, required this.productModel, required this.type});
   final ProductModel productModel;
+  final int type;
   @override
   Widget build(BuildContext context) {
+    print(
+      productModel.name.toString() + type.toString(),
+    );
     return SliverToBoxAdapter(
       child: Container(
         margin: const EdgeInsets.all(8),
@@ -59,7 +64,9 @@ class ResturantDetailsImageAndData extends StatelessWidget {
               height: 24,
             ),
             Hero(
-              tag: productModel.name.toString(),
+              tag: type == 1
+                  ? 'null'
+                  : productModel.name.toString() + type.toString(),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: CachedNetworkImage(

@@ -23,8 +23,8 @@ class TrendingItemContainer extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) =>
-              ResturantDetailsView(productModel: product, state: state),
+          builder: (context) => ResturantDetailsView(
+              productModel: product, state: state, type: 0),
         ));
       },
       child: Card(
@@ -49,7 +49,7 @@ class TrendingItemContainer extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Hero(
-                              tag: product.name.toString(),
+                              tag: '${product.name}0',
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(16),
                                 child: CachedNetworkImage(

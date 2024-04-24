@@ -5,14 +5,19 @@ import 'package:jobizz/features/home/presentation/views/widgets/resturant_detail
 
 class ResturantDetailsView extends StatelessWidget {
   const ResturantDetailsView(
-      {super.key, required this.productModel, required this.state});
+      {super.key,
+      required this.productModel,
+      required this.state,
+      required this.type});
   final ProductModel productModel;
   final ProductSuccess state;
+  final int type;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xfff6f6f6),
       body: ResturantDetailsViewBody(
+        type: type,
         productModel: productModel,
         state: state,
       ),
