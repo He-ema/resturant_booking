@@ -15,9 +15,6 @@ class ResturantDetailsImageAndData extends StatelessWidget {
   final int type;
   @override
   Widget build(BuildContext context) {
-    print(
-      productModel.name.toString() + type.toString(),
-    );
     return SliverToBoxAdapter(
       child: Container(
         margin: const EdgeInsets.all(8),
