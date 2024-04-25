@@ -15,11 +15,14 @@ class _GoogleMapsViewBodyState extends State<GoogleMapsViewBody> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
+  final Set<Marker> markers = {};
+
   // static final CameraPosition _kGooglePlex = CameraPosition(
   //   target: LatLng(Decimal.parse(widget.productModel.geo.latitude).toDouble(), -122.085749655962),
   //   zoom: 14.4746,
   // );
   late CameraPosition _kGooglePlex;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -35,6 +38,24 @@ class _GoogleMapsViewBodyState extends State<GoogleMapsViewBody> {
       ),
       zoom: 14.4746,
     );
+
+    markers.add(
+      Marker(
+          markerId: const MarkerId('Resturant Location'),
+          position: LatLng(
+            double.parse(
+              Decimal.parse(widget.productModel.geo.latitude).toString(),
+            ),
+            double.parse(
+              Decimal.parse(widget.productModel.geo.longitude).toString(),
+            ),
+          ),
+          icon: BitmapDescriptor.defaultMarker,
+          infoWindow: InfoWindow(
+            title: widget.productModel.name,
+            snippet: '5 Star Rating',
+          )),
+    );
   }
 
   @override
@@ -42,6 +63,7 @@ class _GoogleMapsViewBodyState extends State<GoogleMapsViewBody> {
     return GoogleMap(
       mapType: MapType.normal,
       initialCameraPosition: _kGooglePlex,
+      markers: markers,
       onMapCreated: (GoogleMapController controller) {
         _controller.complete(controller);
       },
