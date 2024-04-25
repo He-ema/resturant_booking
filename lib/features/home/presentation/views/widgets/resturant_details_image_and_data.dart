@@ -8,6 +8,7 @@ import 'package:jobizz/constants.dart';
 import 'package:jobizz/core/common_widgets/custom_button.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
 import 'package:jobizz/features/home/data/models/product_model/product_model.dart';
+import 'package:jobizz/features/home/presentation/views/googla_maps_view.dart';
 
 class ResturantDetailsImageAndData extends StatefulWidget {
   const ResturantDetailsImageAndData(
@@ -129,19 +130,30 @@ class _ResturantDetailsImageAndDataState
                             .copyWith(color: Colors.black)),
                   ],
                 ),
-                Row(
-                  children: [
-                    const Icon(Icons.directions, color: Colors.blue),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    Text(
-                      'Visit the Resturant',
-                      style: AppStyles.styleSemiBold12.copyWith(
-                        color: Colors.blue,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => GoogleMapsView(
+                          productModel: widget.productModel,
+                        ),
                       ),
-                    ),
-                  ],
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(Icons.directions, color: Colors.blue),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                        'Visit the Resturant',
+                        style: AppStyles.styleSemiBold12.copyWith(
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
