@@ -27,7 +27,7 @@ class _GoogleMapsViewBodyState extends State<GoogleMapsViewBody> {
     _kGooglePlex = CameraPosition(
       target: LatLng(
         double.parse(
-          Decimal.parse(widget.productModel.geo.longitude).toString(),
+          Decimal.parse(widget.productModel.geo.latitude).toString(),
         ),
         double.parse(
           Decimal.parse(widget.productModel.geo.longitude).toString(),
