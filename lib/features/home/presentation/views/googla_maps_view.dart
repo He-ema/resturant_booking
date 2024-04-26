@@ -12,6 +12,11 @@ class GoogleMapsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(16),
+          bottomRight: Radius.circular(16),
+        )),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
