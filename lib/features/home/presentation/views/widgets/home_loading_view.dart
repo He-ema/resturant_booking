@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:jobizz/core/common_widgets/skelton.dart';
 import 'package:jobizz/features/home/presentation/views/widgets/skelton_header.dart';
 
-class ProfileViewBody extends StatelessWidget {
-  const ProfileViewBody({super.key});
+class HomeLoadingView extends StatelessWidget {
+  const HomeLoadingView({super.key});
 
   @override
   Widget build(BuildContext context) {

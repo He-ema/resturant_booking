@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobizz/features/home/presentation/managers/product_cubit/product_cubit.dart';
 import 'package:jobizz/features/home/presentation/views/widgets/custom_header.dart';
+import 'package:jobizz/features/home/presentation/views/widgets/home_loading_view.dart';
 import 'package:jobizz/features/home/presentation/views/widgets/home_success_view.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -21,7 +22,7 @@ class HomeViewBody extends StatelessWidget {
           );
         } else {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: HomeLoadingView(),
           );
         }
       },
