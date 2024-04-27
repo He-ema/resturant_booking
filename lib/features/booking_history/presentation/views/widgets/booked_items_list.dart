@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jobizz/constants.dart';
+import 'package:jobizz/core/utils/app_styles.dart';
+import 'package:jobizz/core/utils/assets.dart';
 import 'package:jobizz/features/booking_history/presentation/managers/cubit/booked_resturant_cubit.dart';
 import 'package:jobizz/features/booking_history/presentation/views/widgets/booked_resturant_item.dart';
+import 'package:lottie/lottie.dart';
 
 class BookedItemsList extends StatefulWidget {
   const BookedItemsList({
@@ -22,8 +25,13 @@ class _BookedItemsListState extends State<BookedItemsList> {
   Widget build(BuildContext context) {
     return SliverFillRemaining(
       child: widget.state.bookedResturantList.isEmpty
-          ? const Center(
-              child: Text('No data'),
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Lottie.asset(Assets.imagesEmptyBook),
+                const Text('Empty Booking History',
+                    style: AppStyles.styleSemiBold20),
+              ],
             )
           : AnimatedList(
               key: _listKey,
