@@ -6,20 +6,28 @@ import 'package:jobizz/constants.dart';
 import 'package:jobizz/core/common_widgets/custom_button.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
 import 'package:jobizz/features/booking_history/data/models/booked_resturant_model.dart';
+import 'package:jobizz/features/booking_history/presentation/managers/cubit/booked_resturant_cubit.dart';
+import 'package:jobizz/features/booking_history/presentation/views/widgets/booked_resturant_item_address.dart';
+import 'package:jobizz/features/booking_history/presentation/views/widgets/booked_resturant_item_image.dart';
 
 class BookedResturantItem extends StatefulWidget {
   const BookedResturantItem({
     super.key,
     required this.productModel,
+    required this.index,
+    required this.state,
+    required this.listKey,
   });
   final BookedResturantModel productModel;
+  final int index;
+  final BookedResturantSuccess state;
+  final GlobalKey<AnimatedListState> listKey;
   @override
   State<BookedResturantItem> createState() => _BookedResturantItemState();
 }
 
 class _BookedResturantItemState extends State<BookedResturantItem> {
   bool isLoading = false;
-
   @override
   void initState() {
     super.initState();
@@ -42,20 +50,7 @@ class _BookedResturantItemState extends State<BookedResturantItem> {
           child: Row(
             children: [
               Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: CachedNetworkImage(
-                      placeholder: (context, url) =>
-                          const SpinKitSpinningLines(color: kPrimaryColor),
-                      imageUrl: widget.productModel.image ??
-                          'https://res.cloudinary.com/tf-lab/image/upload/restaurant/a356d110-e32c-4ed8-9342-83c7e94322a6/05d9f8ed-cb1b-45e0-9295-0cbfde6b31dd.jpg',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+                child: BookedResturantItemImage(widget: widget),
               ),
               const SizedBox(
                 width: 4,
@@ -76,24 +71,7 @@ class _BookedResturantItemState extends State<BookedResturantItem> {
                         children: [
                           Expanded(
                             flex: 5,
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.location_on,
-                                  color: kPrimaryColor,
-                                  size: 15,
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    widget.productModel.address,
-                                    style: AppStyles.styleMedium12,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: BookedResturantItemAddress(widget: widget),
                           ),
                           const SizedBox(
                             width: 2,
@@ -107,6 +85,8 @@ class _BookedResturantItemState extends State<BookedResturantItem> {
                                 isLoading: isLoading,
                                 onPressed: () async {
                                   await cancelBooking();
+                                  deleteListItem(
+                                      widget.index, context, widget.state);
                                 },
                               ),
                             ),
@@ -135,5 +115,41 @@ class _BookedResturantItemState extends State<BookedResturantItem> {
     if (mounted) {
       setState(() {});
     }
+  }
+
+  Future<void> deleteListItem(
+    int index,
+    BuildContext context,
+    BookedResturantSuccess state,
+  ) async {
+    state.bookedResturantList.removeAt(index);
+    widget.listKey.currentState!.removeItem(
+      index,
+      (context, animation) {
+        return SlideTransition(
+          position: animation.drive(
+            Tween(begin: const Offset(2, 0.0), end: const Offset(0.0, 0.0))
+                .chain(
+              CurveTween(curve: Curves.elasticInOut),
+            ),
+          ),
+          // sizeFactor: animation,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(14),
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              width: MediaQuery.of(context).size.width * 0.75,
+              height: MediaQuery.of(context).size.height * 0.15,
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: const Center(child: Text('Deleted')),
+            ),
+          ),
+        );
+      },
+      duration: const Duration(milliseconds: 2000),
+    );
   }
 }
