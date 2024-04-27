@@ -17,11 +17,13 @@ class BookedResturantItem extends StatefulWidget {
     required this.index,
     required this.state,
     required this.listKey,
+    required this.updateUI,
   });
   final BookedResturantModel productModel;
   final int index;
   final BookedResturantSuccess state;
   final GlobalKey<AnimatedListState> listKey;
+  final VoidCallback updateUI;
   @override
   State<BookedResturantItem> createState() => _BookedResturantItemState();
 }
@@ -87,6 +89,7 @@ class _BookedResturantItemState extends State<BookedResturantItem> {
                                   await cancelBooking();
                                   deleteListItem(
                                       widget.index, context, widget.state);
+                                  lengthZeroUiChanging();
                                 },
                               ),
                             ),
@@ -100,6 +103,14 @@ class _BookedResturantItemState extends State<BookedResturantItem> {
         ),
       ),
     );
+  }
+
+  void lengthZeroUiChanging() {
+    if (widget.state.bookedResturantList.isEmpty) {
+      Future.delayed(const Duration(milliseconds: 2500), () {
+        widget.updateUI();
+      });
+    }
   }
 
   Future<void> cancelBooking() async {

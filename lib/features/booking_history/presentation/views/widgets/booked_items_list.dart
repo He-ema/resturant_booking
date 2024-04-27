@@ -21,22 +21,26 @@ class _BookedItemsListState extends State<BookedItemsList> {
   @override
   Widget build(BuildContext context) {
     return SliverFillRemaining(
-      child: AnimatedList(
-        key: _listKey,
-        padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
-        initialItemCount: widget.state.bookedResturantList.length,
-        itemBuilder: (context, index, animation) => BookedResturantItem(
-          productModel: widget.state.bookedResturantList[index],
-          index: index,
-          state: widget.state,
-          listKey: _listKey,
-        ),
-      ),
+      child: widget.state.bookedResturantList.isEmpty
+          ? const Center(
+              child: Text('No data'),
+            )
+          : AnimatedList(
+              key: _listKey,
+              padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+              initialItemCount: widget.state.bookedResturantList.length,
+              itemBuilder: (context, index, animation) => BookedResturantItem(
+                productModel: widget.state.bookedResturantList[index],
+                index: index,
+                state: widget.state,
+                updateUI: updateUI,
+                listKey: _listKey,
+              ),
+            ),
     );
-    // return SliverList.builder(
-    //     itemCount: state.bookedResturantList.length,
-    //     itemBuilder: (context, index) => BookedResturantItem(
-    //           productModel: state.bookedResturantList[index],
-    //         ));
+  }
+
+  void updateUI() {
+    setState(() {});
   }
 }
