@@ -34,6 +34,9 @@ class AuthCubit extends Cubit<AuthState> {
         name: name,
         verified: false,
       );
+      FirebaseAuth.instance.currentUser!.updateDisplayName(name);
+      FirebaseAuth.instance.currentUser!.updatePhotoURL(
+          'https://firebasestorage.googleapis.com/v0/b/food-5f010.appspot.com/o/avatar.png?alt=media&token=76a28738-9cfb-44e2-8113-dd4549002466');
       this.email = email;
       signedWithGoogle = false;
       emit(AuthSuccess());

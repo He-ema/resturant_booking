@@ -1,8 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobizz/core/utils/assets.dart';
 import 'package:jobizz/features/home/presentation/views/widgets/location_widget.dart';
 import 'package:jobizz/features/home/presentation/views/widgets/header_text_field.dart';
+
+import '../../../../../constants.dart';
 
 class CustomHeader extends StatelessWidget {
   const CustomHeader({super.key});
@@ -21,14 +27,21 @@ class CustomHeader extends StatelessWidget {
             children: [
               SvgPicture.asset(Assets.imagesMenu),
               const LocationWidget(),
-              Container(
-                width: 32,
-                height: 32,
-                decoration: const ShapeDecoration(
-                  shape: OvalBorder(),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  decoration: const ShapeDecoration(
+                    shape: OvalBorder(),
+                  ),
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) =>
+                        const SpinKitSpinningLines(color: kPrimaryColor),
+                    imageUrl: FirebaseAuth.instance.currentUser!.photoURL!,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                child: Image.network(
-                    'https://firebasestorage.googleapis.com/v0/b/food-5f010.appspot.com/o/avatar.png?alt=media&token=76a28738-9cfb-44e2-8113-dd4549002466'),
               ),
             ],
           ),
