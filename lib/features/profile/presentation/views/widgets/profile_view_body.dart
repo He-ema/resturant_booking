@@ -7,11 +7,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jobizz/constants.dart';
 import 'package:jobizz/core/common_widgets/custom_button.dart';
-import 'package:jobizz/core/common_widgets/skelton.dart';
 import 'package:jobizz/core/utils/app_router.dart';
 import 'package:jobizz/core/utils/app_styles.dart';
-import 'package:jobizz/core/utils/assets.dart';
-import 'package:jobizz/features/home/presentation/views/widgets/skelton_header.dart';
 import 'package:jobizz/features/profile/presentation/views/widgets/profile_list_tile.dart';
 
 class ProfileViewBody extends StatelessWidget {
