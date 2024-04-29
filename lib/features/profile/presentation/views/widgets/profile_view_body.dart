@@ -49,11 +49,12 @@ class ProfileViewBody extends StatelessWidget {
                     title:
                         Text(FirebaseAuth.instance.currentUser!.displayName!),
                     subtitle: Text(FirebaseAuth.instance.currentUser!.email!),
-                    trailing: const CircleAvatar(
-                      backgroundColor: Color(0xffF9F9F9),
-                      child: Expanded(
-                          child: Icon(Icons.notifications_none_outlined)),
-                    ),
+                    trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.notifications_none_outlined,
+                          size: 30,
+                        )),
                   ),
                 ),
                 const SizedBox(
@@ -76,7 +77,9 @@ class ProfileViewBody extends StatelessWidget {
                       'Account Settings',
                       style: AppStyles.styleRegular18,
                     ),
-                    trailing: const Icon(FontAwesomeIcons.penToSquare),
+                    trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(FontAwesomeIcons.penToSquare)),
                   ),
                 ),
                 const SizedBox(
